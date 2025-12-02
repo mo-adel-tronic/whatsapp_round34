@@ -1,16 +1,14 @@
 name: Project Automation Master 🤖
 
 on:
-  # 1. يراقب الإيشوز الجديدة
   issues:
     types: [opened]
-  # 2. يراقب طلبات الدمج (فتح، طلب مراجعة، إغلاق/دمج)
   pull_request:
     types: [opened, review_requested, closed]
 
 jobs:
   # ---------------------------------------------------
-  # المهمة الأولى: أي Issue جديد يذهب لـ Todo
+  # 1. New Issue -> Todo
   # ---------------------------------------------------
   issue_to_todo:
     name: New Issue -> Todo
@@ -21,18 +19,16 @@ jobs:
         uses: leonsteinhaeuser/project-beta-automations@v2.2.1
         with:
           gh_token: ${{ secrets.MY_PROJECT_TOKEN }}
-          organization: mo-adel-tronic  # ⚠️ استبدل هذا باسم حسابك
-          project_id: 5     # ⚠️ استبدل هذا برقم المشروع (مثلاً 34)
+          organization: mo-adel-tronic   # ⚠️ عدل هذا
+          project_id: 5      # ⚠️ عدل هذا
           resource_node_id: ${{ github.event.issue.node_id }}
-          operation: update_status
-          status_value: "Todo" # ⚠️ يجب أن يطابق اسم العمود عندك
+          status_value: "Todo"                 # ⚠️ تأكد أن الاسم يطابق العمود
 
   # ---------------------------------------------------
-  # المهمة الثانية: أي PR جديد أو طلب مراجعة يذهب لـ In-Review
+  # 2. PR -> In-Review
   # ---------------------------------------------------
   pr_to_review:
     name: PR -> In-Review
-    # يعمل إذا فتح PR جديد أو تم طلب مراجعة
     if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'review_requested')
     runs-on: ubuntu-latest
     steps:
@@ -40,18 +36,16 @@ jobs:
         uses: leonsteinhaeuser/project-beta-automations@v2.2.1
         with:
           gh_token: ${{ secrets.MY_PROJECT_TOKEN }}
-          organization: mo-adel-tronic  # ⚠️ استبدل هذا
-          project_id: 5     # ⚠️ استبدل هذا
+          organization: mo-adel-tronic   # ⚠️ عدل هذا
+          project_id: 5      # ⚠️ عدل هذا
           resource_node_id: ${{ github.event.pull_request.node_id }}
-          operation: update_status
-          status_value: "In-Review" # ⚠️ يجب أن يطابق اسم العمود عندك
+          status_value: "In-Review"            # ⚠️ تأكد أن الاسم يطابق العمود
 
   # ---------------------------------------------------
-  # المهمة الثالثة: عند الدمج (Merge) يذهب لـ Done
+  # 3. Merged PR -> Done
   # ---------------------------------------------------
   pr_to_done:
     name: Merged PR -> Done
-    # يعمل فقط إذا تم إغلاق الـ PR وكان السبب هو الدمج (merged=true)
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
@@ -59,8 +53,7 @@ jobs:
         uses: leonsteinhaeuser/project-beta-automations@v2.2.1
         with:
           gh_token: ${{ secrets.MY_PROJECT_TOKEN }}
-          organization: mo-adel-tronic  # ⚠️ استبدل هذا
-          project_id: 5     # ⚠️ استبدل هذا
+          organization: mo-adel-tronic   # ⚠️ عدل هذا
+          project_id: 5      # ⚠️ عدل هذا
           resource_node_id: ${{ github.event.pull_request.node_id }}
-          operation: update_status
-          status_value: "Done" # ⚠️ يجب أن يطابق اسم العمود عندك
+          status_value: "Done"                 # ⚠️ تأكد أن الاسم يطابق العمود
