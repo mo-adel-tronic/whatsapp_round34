@@ -19,7 +19,7 @@ jobs:
         uses: leonsteinhaeuser/project-beta-automations@v2.2.1
         with:
           gh_token: ${{ secrets.MY_PROJECT_TOKEN }}
-          organization: mo-adel-tronic   # ⚠️ عدل هذا
+          user: mo-adel-tronic   # ⚠️ عدل هذا
           project_id: 5      # ⚠️ عدل هذا
           resource_node_id: ${{ github.event.issue.node_id }}
           status_value: "Todo"                 # ⚠️ تأكد أن الاسم يطابق العمود
@@ -36,7 +36,7 @@ jobs:
         uses: leonsteinhaeuser/project-beta-automations@v2.2.1
         with:
           gh_token: ${{ secrets.MY_PROJECT_TOKEN }}
-          organization: mo-adel-tronic   # ⚠️ عدل هذا
+          user: mo-adel-tronic   # ⚠️ عدل هذا
           project_id: 5      # ⚠️ عدل هذا
           resource_node_id: ${{ github.event.pull_request.node_id }}
           status_value: "In-Review"            # ⚠️ تأكد أن الاسم يطابق العمود
@@ -53,7 +53,7 @@ jobs:
         uses: leonsteinhaeuser/project-beta-automations@v2.2.1
         with:
           gh_token: ${{ secrets.MY_PROJECT_TOKEN }}
-          organization: mo-adel-tronic   # ⚠️ عدل هذا
+          user: mo-adel-tronic   # ⚠️ عدل هذا
           project_id: 5      # ⚠️ عدل هذا
           resource_node_id: ${{ github.event.pull_request.node_id }}
           status_value: "Done"                 # ⚠️ تأكد أن الاسم يطابق العمود
