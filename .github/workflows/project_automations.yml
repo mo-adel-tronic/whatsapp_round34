@@ -2,7 +2,7 @@ name: Project Automation Master 🤖
 
 on:
   issues:
-    types: [opened]
+    types: [opened, closed]
   pull_request:
     types: [opened, review_requested, closed]
 
@@ -56,4 +56,20 @@ jobs:
           user: mo-adel-tronic   # ⚠️ عدل هذا
           project_id: 5      # ⚠️ عدل هذا
           resource_node_id: ${{ github.event.pull_request.node_id }}
-          status_value: "Done"                 # ⚠️ تأكد أن الاسم يطابق العمود
+          status_value: "Done"                 # ⚠️ تأكد أن الاسم يطابق العمو
+  # ---------------------------------------------------
+  # 4. Closed Issue -> Done (الجديدة) ✅
+  # ---------------------------------------------------
+  issue_closed_to_done:
+    name: Closed Issue -> Done
+    if: github.event_name == 'issues' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move Issue to Done
+        uses: leonsteinhaeuser/project-beta-automations@v2.2.1
+        with:
+          gh_token: ${{ secrets.MY_PROJECT_TOKEN }}
+          user: mo-adel-tronic   # ⚠️ عدل هذا
+          project_id: 5      # ⚠️ عدل هذا
+          resource_node_id: ${{ github.event.issue.node_id }}
+          status_value: "Done"
