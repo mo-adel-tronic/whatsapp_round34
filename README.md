@@ -1,6 +1,6 @@
 # whatsapp_round34
 final project for round 34
 
-update from admin
-
 update from someone
+
+update from admin
